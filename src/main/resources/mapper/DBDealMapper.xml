@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sr.shiro.dao.DBDealDao">
+
+
+    <select id="getAlluser" resultType="com.sr.shiro.bean.User">
+        select * from u_user
+    </select>
+
+    <select id="findByUsername" parameterType="java.lang.String" resultType="com.sr.shiro.bean.User">
+        select * from u_user where nickname=#{username}
+    </select>
+
+    <select id="findRoleByUsername" parameterType="java.lang.String" resultType="com.sr.shiro.bean.UserRole">
+     SELECT
+            r.name as roleName,u.nickname as userName from u_role r
+        LEFT JOIN u_user_role ur ON r.id = ur.rid
+        LEFT JOIN u_user u ON u.id = ur.uid
+        where u.nickname=#{username}
+    </select>
+
+</mapper>
